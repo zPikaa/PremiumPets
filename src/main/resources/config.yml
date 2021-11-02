@@ -1,0 +1,42 @@
+############################
+#     PremiumPets v1.0     #
+#    Configuration file    #
+############################
+
+pets:
+  pikachu:
+    name: "pikachu"
+    displayName: "&6&lPikachu"
+    customHead: "dfa695b59618b3616b6aaa910c5a10146195edd6367d25e9399a74ceef966"
+    buyable: true
+    price: 1000
+  supermario:
+    name: "supermario"
+    displayName: "&c&lSuper&f&lMario"
+    customHead: "80de155a39145b795861b3ff82fe3d53c8987afcd42a0bcbb51cd43d88579a5e"
+    buyable: true
+    price: 1000
+  goku:
+    name: "goku"
+    displayName: "&f&lGoku"
+    customHead: "1e6c958390ad7f795e6606a2a743e2afec3f3fbd93a2b0c7204ed698fd9a"
+    buyable: true
+    price: 5000
+  naruto:
+    name: "naruto"
+    displayName: "&e&lNaruto Uzumaki"
+    customHead: "21e7fc76b13658da8ec1999c102fd9b711389b92c866a765f63f48d12c46d772"
+    buyable: true
+    price: 5000
+  batman:
+    name: "batman"
+    displayName: "&8&lBat Man"
+    customHead: "084a91fb5d9ce34a6e989978d56ad1aad3dbcb2ef7e5ddc71e1752b27cf"
+    buyable: true
+    price: 10000
+  spiderman:
+    name: "spiderman"
+    displayName: "&c&lSpider-man"
+    customHead: "e740c9f91bc9babc633bfad45ca5ad9e9d62d94b7d4359369f250a8b6608"
+    buyable: true
+    price: 10000
