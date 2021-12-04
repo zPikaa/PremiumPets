@@ -53,6 +53,7 @@ public class Utils {
     }
 
     public static void disable(){
+        sqlHandler.closeConnection();
         PetFunctions.killAllPets();
         Bukkit.getLogger().info("[PremiumPets] Plugin disabled!");
     }
