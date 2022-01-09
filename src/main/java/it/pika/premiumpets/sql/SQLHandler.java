@@ -67,13 +67,14 @@ public class SQLHandler {
 
     @SneakyThrows
     public int getRows(String tableName){
-        String QUERY = "SELECT COUNT(*) AS rowcount FROM " + tableName;
+        String QUERY = "SELECT COUNT(*) AS rowCount FROM " + tableName;
         PreparedStatement stmt = connection.prepareStatement(QUERY);
         ResultSet rs = stmt.executeQuery();
         int count = 0;
         if(rs.next()){
-            count = rs.getInt("rowcount");
+            count = rs.getInt("rowCount");
         }
+        stmt.close();
         return count;
     }
 

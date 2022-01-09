@@ -60,6 +60,7 @@ public class PetFunctions {
             stmt.setString(2, p.getName());
             stmt.setString(3, petName);
             stmt.executeUpdate();
+            stmt.close();
             Bukkit.getLogger().info("[PremiumPets] Pet " + petName + " has been gived to " + p.getName());
         } catch (SQLException e) {
             Bukkit.getLogger().warning("[PremiumPets] " + e.getMessage());
@@ -83,6 +84,7 @@ public class PetFunctions {
                 }
             }
         }
+        stmt.close();
         return playerPets;
     }
 
