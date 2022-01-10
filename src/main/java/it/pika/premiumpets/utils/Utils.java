@@ -29,31 +29,33 @@ public class Utils {
     public static HashMap<Player, SpawnedPet> spawnedPets = new HashMap<>();
 
     public static void enable(){
-        if(checkVersion()){
-            if(setupEconomy()){
-                long time = System.currentTimeMillis();
-
-                setupConfig();
-                sqlHandler = new SQLHandler();
-                registerListeners();
-                registerCommands();
-
-                long after = System.currentTimeMillis() - time;
-                Bukkit.getLogger().info("[PremiumPets] Plugin enabled! [" + after + "ms]");
-                Bukkit.getLogger().info("[PremiumPets] Made with love and pizza by Pika.");
-                Bukkit.getLogger().info("[PremiumPets] Server version: " + ReflectionAPI.getVersion());
-            }else{
-                Bukkit.getLogger().severe("[PremiumPets] Vault not found! Disabling the plugin...");
-                Bukkit.getPluginManager().disablePlugin(PremiumPets.getInstance());
-            }
-        }else{
+        if(!checkVersion()){
             Bukkit.getLogger().severe("[PremiumPets] Unsupported version, disabling the plugin...");
             Bukkit.getPluginManager().disablePlugin(PremiumPets.getInstance());
+            return;
         }
+        if(!setupEconomy()){
+            Bukkit.getLogger().severe("[PremiumPets] Vault not found! Disabling the plugin...");
+            Bukkit.getPluginManager().disablePlugin(PremiumPets.getInstance());
+            return;
+        }
+
+        long time = System.currentTimeMillis();
+
+        setupConfig();
+        sqlHandler = new SQLHandler();
+        registerListeners();
+        registerCommands();
+
+        long after = System.currentTimeMillis() - time;
+        Bukkit.getLogger().info("[PremiumPets] Plugin enabled! [" + after + "ms]");
+        Bukkit.getLogger().info("[PremiumPets] Made with love and pizza by Pika.");
+        Bukkit.getLogger().info("[PremiumPets] Server version: " + ReflectionAPI.getVersion());
     }
 
     public static void disable(){
-        sqlHandler.closeConnection();
+        if(sqlHandler != null)
+            sqlHandler.closeConnection();
         PetFunctions.killAllPets();
         Bukkit.getLogger().info("[PremiumPets] Plugin disabled!");
     }
@@ -116,11 +118,11 @@ public class Utils {
         MessagesFile.save();
     }
 
-    private static boolean setupEconomy() {
-        if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
+    private static boolean setupEconomy(){
+        if (Bukkit.getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
-        RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
+        RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
             return false;
         }

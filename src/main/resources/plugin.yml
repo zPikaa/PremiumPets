@@ -2,9 +2,9 @@ name: PremiumPets
 version: ${project.version}
 main: it.pika.premiumpets.PremiumPets
 api-version: 1.14
-authors: [ Pika ]
-depend: [Vault]
+authors: [Pika]
 description: PremiumPets plugin made with love and pizza by Pika
+depend: [Vault]
 commands:
   premiumpets:
     description: Main command
