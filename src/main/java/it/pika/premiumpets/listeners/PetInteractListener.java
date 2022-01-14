@@ -10,9 +10,9 @@ public class PetInteractListener implements Listener {
     @EventHandler
     public void onPetRightClick(PlayerArmorStandManipulateEvent e){
         ArmorStand pet = e.getRightClicked();
-        if(pet.getCustomName().startsWith("PET")){
-            e.setCancelled(true);
-        }
+        if(!pet.getCustomName().startsWith("PET"))
+            return;
+        e.setCancelled(true);
     }
 
 }

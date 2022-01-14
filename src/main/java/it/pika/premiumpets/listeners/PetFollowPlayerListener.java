@@ -17,24 +17,25 @@ public class PetFollowPlayerListener implements Listener {
     @EventHandler
     public void onMove(PlayerMoveEvent e){
         Player p = e.getPlayer();
-        if(Utils.spawnedPets.containsKey(p)){
-            // get spawnedpet and armorstand
-            SpawnedPet spawnedPet = Utils.spawnedPets.get(p);
-            ArmorStand pet = spawnedPet.getPetArmorStand();
+        if(!Utils.spawnedPets.containsKey(p))
+            return;
 
-            // set armorstand head pose asynchronously
-            Bukkit.getScheduler().runTaskAsynchronously(PremiumPets.getInstance(), () -> {
-                double x=0,y=0,z=0;
-                x = Math.toRadians(p.getLocation().getPitch());
-                y = Math.toRadians(p.getLocation().getYaw());
-                EulerAngle a = new EulerAngle(x,y,z);
-                pet.setHeadPose(a);
-            });
+        // get spawnedpet and armorstand
+        SpawnedPet spawnedPet = Utils.spawnedPets.get(p);
+        ArmorStand pet = spawnedPet.getPetArmorStand();
 
-            // follow player
-            Location loc = new Location(p.getWorld(), e.getTo().getX(), e.getTo().getY() + 1.25D, e.getTo().getZ());
-            pet.teleport(loc);
-        }
+        // set armorstand head pose asynchronously
+        Bukkit.getScheduler().runTaskAsynchronously(PremiumPets.getInstance(), () -> {
+            double x=0,y=0,z=0;
+            x = Math.toRadians(p.getLocation().getPitch());
+            y = Math.toRadians(p.getLocation().getYaw());
+            EulerAngle a = new EulerAngle(x,y,z);
+            pet.setHeadPose(a);
+        });
+
+        // follow player
+        Location loc = new Location(p.getWorld(), e.getTo().getX(), e.getTo().getY() + 1.25D, e.getTo().getZ());
+        pet.teleport(loc);
     }
 
 }
